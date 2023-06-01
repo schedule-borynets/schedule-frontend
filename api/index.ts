@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 export const API = axios.create({
-    baseURL: 'http://localhost:3001/',
+    baseURL:
+        process.env.NODE_ENV === 'development'
+            ? 'http://localhost:3001/'
+            : 'https://schedule-backend-production.up.railway.app/',
     withCredentials: true,
 });
 

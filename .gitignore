@@ -38,3 +38,5 @@ next-env.d.ts
 **/public/sw.js
 **/public/fallback-*.js
 **/public/**/*.map
+
+.idea/**
