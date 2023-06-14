@@ -3,10 +3,7 @@ import { Form, Input, Button } from 'antd';
 import Link from 'next/link';
 import { styled } from 'styled-components';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-export interface ScheduleLink {
-    description: string;
-    link: string;
-}
+import { ScheduleLink } from 'store/schedule_links/get';
 
 export interface LinkFormProps {
     link: ScheduleLink;
@@ -23,7 +20,7 @@ const LinkForm: React.FC<LinkFormProps> = ({
     const [editing, setEditing] = useState(false);
 
     const onFinish = (values: ScheduleLink) => {
-        onLinkChange(values);
+        onLinkChange({ ...link, ...values });
         setEditing(false);
     };
 
@@ -34,7 +31,7 @@ const LinkForm: React.FC<LinkFormProps> = ({
                     form={form}
                     initialValues={link}
                     onFinish={onFinish}
-                    layout='horizontal'
+                    layout="horizontal"
                     style={{
                         width: '100%',
                         display: 'flex',
@@ -42,8 +39,8 @@ const LinkForm: React.FC<LinkFormProps> = ({
                     }}
                 >
                     <Form.Item
-                        label='Description'
-                        name='description'
+                        label="Description"
+                        name="description"
                         rules={[
                             {
                                 required: true,
@@ -55,8 +52,8 @@ const LinkForm: React.FC<LinkFormProps> = ({
                     </Form.Item>
 
                     <Form.Item
-                        label='Link'
-                        name='link'
+                        label="Link"
+                        name="link"
                         rules={[
                             { required: true, message: 'Please input link!' },
                         ]}
@@ -65,7 +62,7 @@ const LinkForm: React.FC<LinkFormProps> = ({
                     </Form.Item>
 
                     <Form.Item>
-                        <Button type='default' htmlType='submit'>
+                        <Button type="default" htmlType="submit">
                             Save
                         </Button>
                     </Form.Item>
@@ -81,12 +78,12 @@ const LinkForm: React.FC<LinkFormProps> = ({
             {!editing && (
                 <div>
                     <StyledButton
-                        type='text'
+                        type="text"
                         onClick={() => setEditing(true)}
                         icon={<EditOutlined />}
                     />
                     <StyledButton
-                        type='text'
+                        type="text"
                         danger
                         icon={<DeleteOutlined />}
                         onClick={() => deleteLinkHandler(link)}

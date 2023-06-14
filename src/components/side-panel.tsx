@@ -42,7 +42,6 @@ const SidePanel: React.FC = () => {
     const subjectSchedule = useSelector(getSubjectSchedule).find(
         (s) => s._id === subjectScheduleId
     );
-    console.log('subject', subjectSchedule);
 
     const onClose = () => {
         dispatch(closeSubjectInfoPanel());
@@ -83,18 +82,17 @@ const SidePanel: React.FC = () => {
             <p>
                 <b>Time:</b> {subjectSchedule?.time}
             </p>
-            <Form layout='vertical' requiredMark>
+            <Form layout="vertical" requiredMark>
                 <Row gutter={16}>
                     <Col span={12}> </Col>
                 </Row>
-                <Button onClick={() => setIsEditable(!isEditable)}>Edit</Button>
             </Form>
             <Divider />
 
             <Select
-                mode='tags'
+                mode="tags"
                 style={{ width: '100%' }}
-                placeholder='Enter tag'
+                placeholder="Enter tag"
                 onSelect={handleSelectSelect}
                 onDeselect={handleSelectDeselect}
                 value={tags.map((t) => t._id)}
@@ -114,26 +112,26 @@ const SidePanel: React.FC = () => {
                     <Divider />
                     <Form onFinish={handleCommentSubmit}>
                         <CommentInputWrapper>
-                            <CommentInput name='comment'>
-                                <Input placeholder='Write a comment...' />
+                            <CommentInput name="comment">
+                                <Input placeholder="Write a comment..." />
                             </CommentInput>
                             <Form.Item>
-                                <Button type='default' htmlType='submit'>
+                                <Button type="default" htmlType="submit">
                                     Add Comment
                                 </Button>
                             </Form.Item>
                         </CommentInputWrapper>
                     </Form>
-                    {comments.length > 0 && (
+                    {comments && comments.length > 0 && (
                         <List
-                            itemLayout='horizontal'
+                            itemLayout="horizontal"
                             dataSource={comments}
                             renderItem={(item, index) => (
                                 <List.Item
                                     key={item._id}
                                     actions={[
                                         <Button
-                                            type='text'
+                                            type="text"
                                             key={'delete-comment'}
                                             danger
                                             icon={<DeleteOutlined />}
@@ -147,7 +145,7 @@ const SidePanel: React.FC = () => {
                                 >
                                     <List.Item.Meta
                                         title={
-                                            <a href='https://ant.design'>
+                                            <a href="https://ant.design">
                                                 {item.text}
                                             </a>
                                         }

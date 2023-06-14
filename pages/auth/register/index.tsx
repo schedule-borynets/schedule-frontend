@@ -10,6 +10,7 @@ import {
 } from 'store/auth/register';
 import { getIsUserLoggedIn } from 'store/auth/login';
 import { useRouter } from 'next/router';
+import { Routes } from 'routes';
 
 const Register = () => {
     const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const Register = () => {
             message.error('Error while registration, try again');
         } else if (isLoggedIn && !isLoading) {
             message.success('Successfully registered!');
-            navigation.push('/');
+            navigation.push(Routes.home);
         }
     }, [isLoggedIn, isLoading, errorWhileRegistration, navigation]);
 
@@ -48,12 +49,12 @@ const Register = () => {
             <Col xs={20} sm={16} md={12} lg={8} xl={6}>
                 <Form
                     form={form}
-                    name='register'
+                    name="register"
                     onFinish={handleSubmit}
-                    autoComplete='off'
+                    autoComplete="off"
                 >
                     <Form.Item
-                        name='name'
+                        name="name"
                         rules={[
                             {
                                 required: true,
@@ -61,11 +62,11 @@ const Register = () => {
                             },
                         ]}
                     >
-                        <Input prefix={<UserOutlined />} placeholder='Name' />
+                        <Input prefix={<UserOutlined />} placeholder="Name" />
                     </Form.Item>
 
                     <Form.Item
-                        name='email'
+                        name="email"
                         rules={[
                             {
                                 type: 'email',
@@ -77,11 +78,11 @@ const Register = () => {
                             },
                         ]}
                     >
-                        <Input prefix={<MailOutlined />} placeholder='Email' />
+                        <Input prefix={<MailOutlined />} placeholder="Email" />
                     </Form.Item>
 
                     <Form.Item
-                        name='password'
+                        name="password"
                         rules={[
                             {
                                 required: true,
@@ -91,13 +92,13 @@ const Register = () => {
                     >
                         <Input
                             prefix={<LockOutlined />}
-                            type='password'
-                            placeholder='Password'
+                            type="password"
+                            placeholder="Password"
                         />
                     </Form.Item>
 
                     <Form.Item
-                        name='confirmPassword'
+                        name="confirmPassword"
                         rules={[
                             {
                                 required: true,
@@ -122,13 +123,13 @@ const Register = () => {
                     >
                         <Input
                             prefix={<LockOutlined />}
-                            type='password'
-                            placeholder='Confirm Password'
+                            type="password"
+                            placeholder="Confirm Password"
                         />
                     </Form.Item>
 
                     <Form.Item>
-                        <Button type='primary' htmlType='submit'>
+                        <Button type="primary" htmlType="submit">
                             Register
                         </Button>
                     </Form.Item>

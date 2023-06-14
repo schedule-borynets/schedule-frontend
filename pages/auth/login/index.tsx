@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Form, Input, Button, Row, Col, Layout, message } from 'antd';
-import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -12,6 +12,7 @@ import {
 const { Content } = Layout;
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { Routes } from 'routes';
 
 const Container = styled(Row)`
     display: flex;
@@ -33,7 +34,7 @@ const Login = () => {
             message.error('Error while logging in, try again later');
         } else if (isLoggedIn && !isLoading) {
             message.success('Successfully logged in!');
-            navigation.push('/');
+            navigation.push(Routes.home);
         }
     }, [isLoggedIn, isLoading, errorWhileLoggingIn, navigation]);
 
@@ -54,12 +55,12 @@ const Login = () => {
                     <Col xs={20} sm={16} md={12} lg={8} xl={6}>
                         <Form
                             form={form}
-                            name='login'
+                            name="login"
                             onFinish={handleSubmit}
-                            autoComplete='off'
+                            autoComplete="off"
                         >
                             <Form.Item
-                                name='email'
+                                name="email"
                                 rules={[
                                     {
                                         type: 'email',
@@ -74,12 +75,12 @@ const Login = () => {
                             >
                                 <Input
                                     prefix={<MailOutlined />}
-                                    placeholder='Email'
+                                    placeholder="Email"
                                 />
                             </Form.Item>
 
                             <Form.Item
-                                name='password'
+                                name="password"
                                 rules={[
                                     {
                                         required: true,
@@ -89,19 +90,19 @@ const Login = () => {
                             >
                                 <Input
                                     prefix={<LockOutlined />}
-                                    type='password'
-                                    placeholder='Password'
+                                    type="password"
+                                    placeholder="Password"
                                 />
                             </Form.Item>
                             <ButtonsContainer>
                                 <Form.Item>
-                                    <Button type='primary' htmlType='submit'>
+                                    <Button type="primary" htmlType="submit">
                                         Login
                                     </Button>
                                 </Form.Item>
                                 <Form.Item>
-                                    <Link href={'/auth/register'}>
-                                        <Button type='link' htmlType='button'>
+                                    <Link href={Routes.register}>
+                                        <Button type="link" htmlType="button">
                                             Register
                                         </Button>
                                     </Link>

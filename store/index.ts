@@ -1,8 +1,4 @@
-import {
-    addComment,
-    addCommentSaga,
-    addCommentSlice,
-} from './comment/add/index';
+import { addCommentSaga, addCommentSlice } from './comment/add/index';
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import createSagaMiddleware from 'redux-saga';
@@ -35,6 +31,10 @@ import { addTagSaga, addTagSlice } from 'store/tag/add';
 import { deleteTagSaga, deleteTagSlice } from 'store/tag/delete';
 import { getSessionSaga, getSessionSlice } from 'store/session';
 import { menuSlice } from 'store/menu';
+import { getLinksSaga, getLinksSlice } from './schedule_links/get';
+import { addLinkSaga, addLinkSlice } from './schedule_links/add';
+import { deleteLinkSaga, deleteLinkSlice } from './schedule_links/delete';
+import { updateLinkSaga, updateLinkSlice } from 'store/schedule_links/update';
 
 const rootReducer = combineReducers({
     openInfoPanel: openInfoPanelSlice.reducer,
@@ -57,6 +57,10 @@ const rootReducer = combineReducers({
     deleteTag: deleteTagSlice.reducer,
     getSession: getSessionSlice.reducer,
     menu: menuSlice.reducer,
+    getLinks: getLinksSlice.reducer,
+    addLink: addLinkSlice.reducer,
+    deleteLink: deleteLinkSlice.reducer,
+    updateLink: updateLinkSlice.reducer,
 });
 
 function* rootSaga() {
@@ -79,6 +83,10 @@ function* rootSaga() {
         fork(addTagSaga),
         fork(deleteTagSaga),
         fork(getSessionSaga),
+        fork(getLinksSaga),
+        fork(addLinkSaga),
+        fork(deleteLinkSaga),
+        fork(updateLinkSaga),
     ]);
 }
 

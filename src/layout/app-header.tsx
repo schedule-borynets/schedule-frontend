@@ -30,10 +30,10 @@ const AppHeader = () => {
     const dispatch = useDispatch();
 
     const theme = useSelector(getIsThemeDark);
-    const [profileLink, setProfileLink] = useState('/profile');
+    const [profileLink, setProfileLink] = useState(Routes.profile);
 
     const isLoggedIn = useSelector(getIsUserLoggedIn);
-    const { scheduleType } = useSelector(getProfileInfo);
+
     const groups = useSelector(getGroups);
     const teachers = useSelector(getTeachers);
 
@@ -49,7 +49,7 @@ const AppHeader = () => {
     }, [isLoggedIn]);
 
     useEffect(() => {
-        if (router.pathname.includes('/schedule')) {
+        if (router.pathname.includes(Routes.schedule)) {
             const path = router.pathname.split('/');
             const pathname = path[2];
 
@@ -105,42 +105,34 @@ const AppHeader = () => {
         <StyledHeader isThemeDark={theme}>
             <Container>
                 <LogoContainer>
-                    <Link
-                        href={
-                            isLoggedIn
-                                ? `${Routes.schedule}/personal`
-                                : `${Routes.schedule}/group`
+                    <Logo
+                        src={
+                            theme
+                                ? '/images/schedule_logo_dark.png'
+                                : '/images/schedule_logo.png'
                         }
-                    >
-                        <Logo
-                            src={
-                                theme
-                                    ? '/images/schedule_logo_dark.png'
-                                    : '/images/schedule_logo.png'
-                            }
-                        />
-                    </Link>
+                    />
                 </LogoContainer>
 
                 <ContentContainer>
                     <MenuContainer>
                         <div>
                             <StyledMenu
-                                mode='horizontal'
+                                mode="horizontal"
                                 defaultSelectedKeys={['group']}
                                 selectedKeys={[activeMenuTab]}
                                 theme={theme ? 'dark' : 'light'}
                                 onSelect={handleMenuChange}
                             >
-                                <Menu.Item key='group'>
+                                <Menu.Item key="group">
                                     Розклад занять
                                 </Menu.Item>
-                                <Menu.Item key='session'>Сесія</Menu.Item>
-                                <Menu.Item key='teacher'>
+                                <Menu.Item key="session">Сесія</Menu.Item>
+                                <Menu.Item key="teacher">
                                     Розклад для викладачів
                                 </Menu.Item>
                                 {isLoggedIn && (
-                                    <Menu.Item key='personal'>
+                                    <Menu.Item key="personal">
                                         Персональний
                                     </Menu.Item>
                                 )}
@@ -153,8 +145,8 @@ const AppHeader = () => {
                                 activeMenuTab !== 'personal' && (
                                     <StyledSelect
                                         showSearch
-                                        placeholder='Search...'
-                                        optionFilterProp='children'
+                                        placeholder="Search..."
+                                        optionFilterProp="children"
                                         filterOption={(input, option) =>
                                             option?.label
                                                 .toLowerCase()
@@ -185,7 +177,7 @@ const AppHeader = () => {
                         <Link href={profileLink}>
                             <Button icon={<UserOutlined />} />
                         </Link>
-                        {/* <div> */}
+
                         <SwitchContainer>
                             <Switch
                                 checkedChildren={<CheckOutlined />}
@@ -194,7 +186,6 @@ const AppHeader = () => {
                                 onChange={handleSwitchChange}
                             ></Switch>
                         </SwitchContainer>
-                        {/* </div> */}
                     </InputButtonContainer>
                 </ContentContainer>
             </Container>

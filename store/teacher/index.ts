@@ -110,8 +110,8 @@ function* workerSaga(
             type: fetchTeachersSucceeded.type,
             payload: { teachers: response },
         });
-    } catch (error) {
-        console.log('ERROR:', error);
+    } catch (err) {
+        console.log(err);
         yield put({ type: fetchTeachersFailed.type });
     }
 }

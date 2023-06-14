@@ -65,12 +65,12 @@ function ProfileSettings() {
         <Content>
             <div>
                 <StyledDescriptions
-                    title='Персональна інформація'
-                    layout='horizontal'
+                    title="Персональна інформація"
+                    layout="horizontal"
                     column={1}
                 >
-                    <Descriptions.Item label='Name'>
-                        {isEditable && name ? (
+                    <Descriptions.Item label="Name">
+                        {isEditable ? (
                             <Input
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -80,7 +80,7 @@ function ProfileSettings() {
                         )}
                     </Descriptions.Item>
 
-                    <Descriptions.Item label='Email'>
+                    <Descriptions.Item label="Email">
                         {isEditable && email ? (
                             <Input
                                 value={email}
@@ -91,7 +91,7 @@ function ProfileSettings() {
                         )}
                     </Descriptions.Item>
 
-                    <Descriptions.Item label='Schedule for'>
+                    <Descriptions.Item label="Schedule for">
                         <Select
                             style={{ width: '200px' }}
                             onChange={(value: any) => {

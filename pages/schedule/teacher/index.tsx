@@ -1,13 +1,9 @@
-import PersonalScheduleTabs from '@/components/personal-schedule-tabs';
 import ScheduleTabs from '@/components/schedule-tabs';
 import SidePanel from '@/components/side-panel';
-import { EditOutlined } from '@ant-design/icons';
-import { Button, Layout } from 'antd';
-import { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchGroups } from 'store/group';
-import { getGroupSchedule, getTeacherSchedule } from 'store/schedule/get';
-import { getSession } from 'store/session';
+import { Layout } from 'antd';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { getTeacherSchedule } from 'store/schedule/get';
 import styled from 'styled-components';
 const { Content } = Layout;
 

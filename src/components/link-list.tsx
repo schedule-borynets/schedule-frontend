@@ -1,22 +1,43 @@
 import React, { useState } from 'react';
 import { List, Button, Form, Input } from 'antd';
-import LinkForm, { ScheduleLink } from '@/components/link-form';
+import LinkForm from '@/components/link-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { ScheduleLink, getLinks } from '../../store/schedule_links/get';
+import { addLink } from '../../store/schedule_links/add';
+import { getSelectedSubjectId } from '../../store/subject/open-info-panel';
+import { updateLink } from 'store/schedule_links/update';
+import { deleteLink } from 'store/schedule_links/delete';
 
 const LinkList: React.FC = () => {
-    const [links, setLinks] = useState<ScheduleLink[]>([]);
+    const dispatch = useDispatch();
+
     const [form] = Form.useForm();
+    const links = useSelector(getLinks);
+    const subjectScheduleId = useSelector(getSelectedSubjectId);
 
     const onFinish = (values: ScheduleLink) => {
-        setLinks([...links, values]);
-        form.resetFields();
+        dispatch(
+            addLink({
+                description: values.description,
+                link: values.link,
+                subjectSchedule: subjectScheduleId,
+            })
+        );
     };
 
-    const updateLink = (index: number, newLink: ScheduleLink) => {
-        setLinks(links.map((link, i) => (i === index ? newLink : link)));
+    const updateLinkHandler = (newLink: ScheduleLink) => {
+        dispatch(
+            updateLink({
+                linkId: newLink._id,
+                subjectScheduleId: newLink.subjectSchedule,
+                description: newLink.description,
+                link: newLink.link,
+            })
+        );
     };
 
-    const handleLinkDelete = (index: number, newLink: ScheduleLink) => {
-        setLinks(links.filter((link, i) => i !== index));
+    const handleLinkDelete = (link: ScheduleLink) => {
+        dispatch(deleteLink(link._id));
     };
 
     return (
@@ -25,7 +46,7 @@ const LinkList: React.FC = () => {
                 form={form}
                 initialValues={{ description: '', link: '' }}
                 onFinish={onFinish}
-                layout='horizontal'
+                layout="horizontal"
                 style={{
                     width: '100%',
                     display: 'flex',
@@ -33,8 +54,8 @@ const LinkList: React.FC = () => {
                 }}
             >
                 <Form.Item
-                    label='Description'
-                    name='description'
+                    label="Description"
+                    name="description"
                     rules={[
                         {
                             required: true,
@@ -46,15 +67,15 @@ const LinkList: React.FC = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label='Link'
-                    name='link'
+                    label="Link"
+                    name="link"
                     rules={[{ required: true, message: 'Please input link!' }]}
                 >
                     <Input />
                 </Form.Item>
 
                 <Form.Item>
-                    <Button type='default' htmlType='submit'>
+                    <Button type="default" htmlType="submit">
                         Add link
                     </Button>
                 </Form.Item>
@@ -68,10 +89,10 @@ const LinkList: React.FC = () => {
                             <LinkForm
                                 link={link}
                                 onLinkChange={(newLink) =>
-                                    updateLink(index, newLink)
+                                    updateLinkHandler(newLink)
                                 }
-                                deleteLinkHandler={(newLink) =>
-                                    handleLinkDelete(index, newLink)
+                                deleteLinkHandler={(link) =>
+                                    handleLinkDelete(link)
                                 }
                             />
                         </List.Item>

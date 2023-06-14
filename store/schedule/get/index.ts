@@ -301,7 +301,6 @@ function* teacherScheduleSaga(
 function* timeSaga(): Generator<CallEffect<AxiosResponse<any>>, void, unknown> {
     try {
         const time = yield call(callAPIGetWeek);
-        console.log('timeSaga', time);
     } catch (err) {}
 }
 

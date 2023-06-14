@@ -1,12 +1,8 @@
-import { Layout, Button, Spin } from 'antd';
+import { Layout, Button } from 'antd';
 import SidePanel from '@/components/side-panel';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-    CheckCircleOutlined,
-    EditOutlined,
-    LoadingOutlined,
-} from '@ant-design/icons';
+import { CheckCircleOutlined, EditOutlined } from '@ant-design/icons';
 import { styled } from 'styled-components';
 import { fetchTeachers } from 'store/teacher';
 import { useEffect } from 'react';
