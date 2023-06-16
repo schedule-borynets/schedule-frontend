@@ -12,13 +12,7 @@ import {
     put,
     takeEvery,
 } from 'redux-saga/effects';
-import {
-    fetchProfileInfoSucceeded,
-    fetchProfileInfoFailed,
-    ProfileResponse,
-    ProfileInfo,
-    fetchProfileInfo,
-} from 'store/profile/get';
+import { ProfileResponse, fetchProfileInfo } from 'store/profile/get';
 
 export type ScheduleType = 'group' | 'teacher';
 
@@ -94,13 +88,8 @@ async function callAPIUpdateProfileInfo(
     userId: string,
     json: UpdateProfilePayload
 ): Promise<AxiosResponse<any>> {
-    try {
-        const response = await API.patch(`/user/${userId}`, json);
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.patch(`/user/${userId}`, json);
+    return response.data;
 }
 
 // saga

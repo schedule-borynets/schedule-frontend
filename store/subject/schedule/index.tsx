@@ -121,24 +121,14 @@ const getSubjectScheduleReducer = (
 async function callAPIGetSubjectScheduleForGroup(
     groupId: string
 ): Promise<AxiosResponse<Group>> {
-    try {
-        const response = await API.get(`subject-schedule/group/${groupId}`);
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.get(`subject-schedule/group/${groupId}`);
+    return response.data;
 }
 async function callAPIGetSubjectScheduleForTeacher(
     teacherId: string
 ): Promise<AxiosResponse<any>> {
-    try {
-        const response = await API.get(`subject-schedule/teacher/${teacherId}`);
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.get(`subject-schedule/teacher/${teacherId}`);
+    return response.data;
 }
 
 // saga

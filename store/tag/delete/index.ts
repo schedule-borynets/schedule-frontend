@@ -4,7 +4,7 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 import { API } from 'api';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import {
     CallEffect,
     PutEffect,
@@ -14,7 +14,6 @@ import {
     select,
     takeEvery,
 } from 'redux-saga/effects';
-import { loginUserSucceeded } from 'store/auth/login';
 import { fetchTags } from 'store/tag/get';
 import { getSelectedSubjectId } from 'store/subject/open-info-panel';
 
@@ -82,12 +81,8 @@ type APIResponse = {
 async function callAPIDeleteTag(
     tagId: string
 ): Promise<AxiosResponse<APIResponse>> {
-    try {
-        const response = await API.delete(`/tag/${tagId}`);
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.delete(`/tag/${tagId}`);
+    return response.data;
 }
 
 // saga

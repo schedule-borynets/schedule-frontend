@@ -125,13 +125,8 @@ const getProfileInfoReducer = (
 async function callAPIGetProfileInfo(
     userId: string
 ): Promise<AxiosResponse<ProfileInfo>> {
-    try {
-        const response = await API.get(`/user/${userId}`);
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.get(`/user/${userId}`);
+    return response.data;
 }
 
 // saga

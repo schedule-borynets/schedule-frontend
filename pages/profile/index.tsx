@@ -59,8 +59,6 @@ function ProfileSettings() {
         dispatch(logoutUser());
     };
 
-    const handleScheduleValueSearch = () => {};
-
     return (
         <Content>
             <div>
@@ -70,7 +68,7 @@ function ProfileSettings() {
                     column={1}
                 >
                     <Descriptions.Item label="Name">
-                        {isEditable ? (
+                        {isEditable && name ? (
                             <Input
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -118,7 +116,6 @@ function ProfileSettings() {
                         <Select
                             style={{ width: '200px' }}
                             showSearch
-                            onSearch={handleScheduleValueSearch}
                             filterOption={(input, option) =>
                                 (option?.label ?? '')
                                     .toLowerCase()

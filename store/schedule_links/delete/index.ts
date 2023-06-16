@@ -2,9 +2,9 @@ import {
     ActionReducerMapBuilder,
     createAction,
     createSlice,
-} from '@reduxjs/toolkit'
-import { API } from 'api'
-import axios, { AxiosResponse } from 'axios'
+} from '@reduxjs/toolkit';
+import { API } from 'api';
+import { AxiosResponse } from 'axios';
 import {
     CallEffect,
     PutEffect,
@@ -13,17 +13,17 @@ import {
     put,
     select,
     takeEvery,
-} from 'redux-saga/effects'
-import { getSelectedSubjectId } from 'store/subject/open-info-panel'
-import { fetchLinks } from '../get'
+} from 'redux-saga/effects';
+import { getSelectedSubjectId } from 'store/subject/open-info-panel';
+import { fetchLinks } from '../get';
 
 type DeleteLinkState = {
-    isLoading: boolean
-}
+    isLoading: boolean;
+};
 
 const initialState: DeleteLinkState = {
     isLoading: false,
-}
+};
 
 // actions
 
@@ -34,15 +34,15 @@ export const deleteLink = createAction(
             linkId,
         },
     })
-)
+);
 
-export const deleteLinkSucceeded = createAction('DELETE_LINK_SUCCEEDED')
+export const deleteLinkSucceeded = createAction('DELETE_LINK_SUCCEEDED');
 
-export const deleteLinkFailed = createAction('DELETE_LINK_FAILED')
+export const deleteLinkFailed = createAction('DELETE_LINK_FAILED');
 
 // selectors
 
-export const getIsLoading = (state: any) => state.deleteLink.isLoading
+export const getIsLoading = (state: any) => state.deleteLink.isLoading;
 
 // reducers
 
@@ -54,47 +54,43 @@ const deleteLinkReducer = (
             return {
                 ...state,
                 isLoading: true,
-            }
+            };
         })
         .addCase(deleteLinkSucceeded, (state, action) => {
             return {
                 ...state,
                 isLoading: false,
-            }
+            };
         })
         .addCase(deleteLinkFailed, (state, action) => {
             return {
                 ...state,
                 isLoading: false,
-            }
-        })
-}
+            };
+        });
+};
 
 // request
 
 type APIResponse = {
-    access_token: string
-    refresh_token: string
+    access_token: string;
+    refresh_token: string;
     user: {
-        id: string
-    }
-}
+        id: string;
+    };
+};
 
 async function callAPIDeleteLink(
     linkId: string
 ): Promise<AxiosResponse<APIResponse>> {
-    try {
-        const response = await API.delete(`/link/${linkId}`)
-        return response.data
-    } catch (err) {
-        throw err
-    }
+    const response = await API.delete(`/link/${linkId}`);
+    return response.data;
 }
 
 // saga
 
 export function* deleteLinkSaga() {
-    yield takeEvery(deleteLink.type, workerSaga)
+    yield takeEvery(deleteLink.type, workerSaga);
 }
 
 function* workerSaga(
@@ -107,17 +103,17 @@ function* workerSaga(
     unknown
 > {
     try {
-        yield call(callAPIDeleteLink, action.payload.linkId)
+        yield call(callAPIDeleteLink, action.payload.linkId);
 
-        yield put({ type: deleteLinkSucceeded.type })
-        const subjectScheduleId = yield select(getSelectedSubjectId)
+        yield put({ type: deleteLinkSucceeded.type });
+        const subjectScheduleId = yield select(getSelectedSubjectId);
         yield put({
             type: fetchLinks.type,
             payload: { subjectScheduleId: subjectScheduleId },
-        })
+        });
     } catch (err) {
-        console.log(err)
-        yield put({ type: deleteLinkFailed.type })
+        console.log(err);
+        yield put({ type: deleteLinkFailed.type });
     }
 }
 
@@ -128,4 +124,4 @@ export const deleteLinkSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: deleteLinkReducer,
-})
+});

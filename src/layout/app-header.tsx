@@ -8,7 +8,6 @@ import * as colors from '@ant-design/colors';
 import Link from 'next/link';
 import { getIsUserLoggedIn } from 'store/auth/login';
 import { useEffect, useState } from 'react';
-import { getProfileInfo } from 'store/profile/get';
 import { ScheduleType } from 'store/profile/update';
 import { getGroups } from 'store/group';
 import { getTeachers } from 'store/teacher';
@@ -16,12 +15,15 @@ import { getTeachers } from 'store/teacher';
 import { useRouter } from 'next/router';
 import { Routes } from 'routes';
 import { changeActiveMenuTab, getActiveMenuTab } from 'store/menu';
-import { getGroupId, getTeacherId } from 'store/schedule/get';
-import { fetchGroupSchedule, fetchTeacherSchedule } from 'store/schedule/get';
+import {
+    fetchGroupSchedule,
+    fetchTeacherSchedule,
+    getGroupId,
+    getTeacherId,
+} from 'store/schedule/get';
 import { fetchSession } from 'store/session';
 
-const { Header, Content } = Layout;
-const { Option } = Select;
+const { Header } = Layout;
 const palette = colors.presetDarkPalettes.grey;
 
 export type ScheduleMenuType = ScheduleType | 'session';

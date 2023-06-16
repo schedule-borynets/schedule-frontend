@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Drawer,
     Form,
@@ -25,7 +25,6 @@ import styled from 'styled-components';
 import { format } from 'date-fns';
 import { deleteComment } from 'store/comment/delete';
 import { addTag } from 'store/tag/add';
-const { Option } = Select;
 import _ from 'lodash';
 import { deleteTag } from 'store/tag/delete';
 import Spinner from '@/components/spinner';
@@ -46,7 +45,6 @@ const SidePanel: React.FC = () => {
     const onClose = () => {
         dispatch(closeSubjectInfoPanel());
     };
-    const [isEditable, setIsEditable] = useState(false);
 
     const handleCommentSubmit = (values: any) => {
         dispatch(

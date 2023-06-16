@@ -1,10 +1,7 @@
 import axios from 'axios';
 
 export const API = axios.create({
-    baseURL:
-        process.env.NODE_ENV === 'development'
-            ? 'http://localhost:3001/'
-            : 'https://schedule-backend-production.up.railway.app/',
+    baseURL: 'http://localhost:3001/',
     withCredentials: true,
 });
 
@@ -14,3 +11,4 @@ API.interceptors.request.use(function (config) {
     config.headers.Authorization = token ? `Bearer ${token}` : '';
     return config;
 });
+// : 'https://schedule-backend-production.up.railway.app/',

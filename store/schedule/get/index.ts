@@ -173,64 +173,40 @@ const getScheduleReducer = (
 // request
 
 async function callAPIGetGroup(groupId: string): Promise<AxiosResponse<Group>> {
-    try {
-        const response = await API.get(`group/${groupId}`);
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.get(`group/${groupId}`);
+    return response.data;
 }
+
 async function callAPIGetTeacher(
     teacherId: string
 ): Promise<AxiosResponse<any>> {
-    try {
-        const response = await API.get(`teacher/${teacherId}`);
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.get(`teacher/${teacherId}`);
+    return response.data;
 }
 
 async function callAPIGetGroupSchedule(
     groupId: string
 ): Promise<AxiosResponse<Schedule>> {
-    try {
-        const response = await axios.get(
-            `https://schedule.kpi.ua/api/schedule/lessons?groupId=${groupId}`
-        );
-
-        return response.data.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await axios.get(
+        `https://schedule.kpi.ua/api/schedule/lessons?groupId=${groupId}`
+    );
+    return response.data.data;
 }
 
 async function callAPIGetTeacherSchedule(
     teacherId: string
 ): Promise<AxiosResponse<Schedule>> {
-    try {
-        const response = await axios.get(
-            `https://schedule.kpi.ua/api/schedule/lecturer?lecturerId=${teacherId}`
-        );
-
-        return response.data.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await axios.get(
+        `https://schedule.kpi.ua/api/schedule/lecturer?lecturerId=${teacherId}`
+    );
+    return response.data.data;
 }
 
 async function callAPIGetWeek(): Promise<AxiosResponse<Schedule>> {
-    try {
-        const response = await axios.get(
-            `https://schedule.kpi.ua/api/time/current`
-        );
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await axios.get(
+        `https://schedule.kpi.ua/api/time/current`
+    );
+    return response.data;
 }
 
 // saga
@@ -300,7 +276,7 @@ function* teacherScheduleSaga(
 
 function* timeSaga(): Generator<CallEffect<AxiosResponse<any>>, void, unknown> {
     try {
-        const time = yield call(callAPIGetWeek);
+        yield call(callAPIGetWeek);
     } catch (err) {}
 }
 

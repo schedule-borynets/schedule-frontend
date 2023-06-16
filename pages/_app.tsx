@@ -7,7 +7,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { getIsThemeDark } from 'store/theme';
 import AppHeader from '@/layout/app-header';
 import { useEffect } from 'react';
-import { loginUserSucceeded, setUserLoggedIn } from 'store/auth/login';
+import { setUserLoggedIn } from 'store/auth/login';
 import { fetchGroups } from 'store/group';
 import { fetchTeachers } from 'store/teacher';
 import { fetchProfileInfo } from 'store/profile/get';
@@ -19,7 +19,7 @@ function MyApp({ Component, ...rest }: AppProps) {
 
     const { store, props } = wrapper.useWrappedStore(rest);
 
-    const { emotionCache: clientSideEmotionCache, pageProps } = props;
+    const { emotionCache, pageProps } = props;
 
     const isThemeDark = useSelector(getIsThemeDark);
     useEffect(() => {
@@ -35,7 +35,7 @@ function MyApp({ Component, ...rest }: AppProps) {
         if (teacherId) {
             dispatch(fetchTeacherSchedule(teacherId));
         }
-    }, []);
+    }, [dispatch]);
     useEffect(() => {
         const userId = localStorage.getItem('user_id');
         if (userId) {

@@ -14,8 +14,11 @@ import {
     select,
     takeEvery,
 } from 'redux-saga/effects';
-import { fetchProfileInfoSucceeded, getProfileInfo } from 'store/profile/get';
-import { ProfileInfo } from 'store/profile/get';
+import {
+    ProfileInfo,
+    fetchProfileInfoSucceeded,
+    getProfileInfo,
+} from 'store/profile/get';
 
 type EditScheduleState = {
     isEditing: boolean;
@@ -131,15 +134,10 @@ async function callAPIHiddenSubjectsSchedule(
     userId: string,
     hiddenSubjects: string[]
 ): Promise<AxiosResponse<ProfileInfo>> {
-    try {
-        const response = await API.patch(`user/${userId}`, {
-            hiddenSubjects,
-        });
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.patch(`user/${userId}`, {
+        hiddenSubjects,
+    });
+    return response.data;
 }
 
 export function* editScheduleSaga() {

@@ -29,7 +29,7 @@ export default function PersonalSchedule() {
     useEffect(() => {
         dispatch(fetchGroups());
         dispatch(fetchTeachers());
-    }, []);
+    }, [dispatch]);
     // Initialize an array with 6 empty arrays, one for each day of the week
     if (isLoading) {
         return <Spinner />;
@@ -59,7 +59,7 @@ export default function PersonalSchedule() {
             <Content>
                 {isEditable ? (
                     <Button
-                        type='text'
+                        type="text"
                         icon={<CheckCircleOutlined />}
                         onClick={handleSaveScheduleClick}
                     >
@@ -67,7 +67,7 @@ export default function PersonalSchedule() {
                     </Button>
                 ) : (
                     <Button
-                        type='text'
+                        type="text"
                         icon={<EditOutlined />}
                         onClick={handleEditScheduleClick}
                     >

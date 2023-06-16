@@ -1,19 +1,16 @@
 import {
-    Action,
     ActionReducerMapBuilder,
     createAction,
     createSlice,
 } from '@reduxjs/toolkit';
 import { API } from 'api';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import {
     CallEffect,
     PutEffect,
-    apply,
     call,
     put,
     takeEvery,
-    takeLatest,
 } from 'redux-saga/effects';
 
 export type Teacher = {
@@ -81,13 +78,8 @@ const teachersReducer = (builder: ActionReducerMapBuilder<TeachersState>) => {
 // request
 
 async function callAPIGetTeachers(): Promise<AxiosResponse<any>> {
-    try {
-        const response = await API.get(`/teacher`);
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.get(`/teacher`);
+    return response.data;
 }
 
 // saga

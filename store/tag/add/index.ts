@@ -4,7 +4,7 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 import { API } from 'api';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import {
     CallEffect,
     PutEffect,
@@ -14,7 +14,6 @@ import {
     select,
     takeEvery,
 } from 'redux-saga/effects';
-import { loginUserSucceeded } from 'store/auth/login';
 
 import { getSelectedSubjectId } from 'store/subject/open-info-panel';
 import { fetchTags } from 'store/tag/get';
@@ -81,12 +80,8 @@ async function callAPIAddTag(json: {
     text: string;
     subjectSchedules: string[];
 }): Promise<AxiosResponse<any>> {
-    try {
-        const response = await API.post('/tag', json);
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.post('/tag', json);
+    return response.data;
 }
 
 // saga

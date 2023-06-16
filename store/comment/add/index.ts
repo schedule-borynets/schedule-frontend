@@ -4,7 +4,7 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 import { API } from 'api';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import {
     CallEffect,
     PutEffect,
@@ -14,7 +14,6 @@ import {
     select,
     takeEvery,
 } from 'redux-saga/effects';
-import { loginUserSucceeded } from 'store/auth/login';
 import { fetchComments } from 'store/comment/get';
 import { getSelectedSubjectId } from 'store/subject/open-info-panel';
 
@@ -92,12 +91,8 @@ async function callAPIAddComment(
         user: string;
     }
 ): Promise<AxiosResponse<APIResponse>> {
-    try {
-        const response = await API.post('/comment', json);
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.post('/comment', json);
+    return response.data;
 }
 
 // saga

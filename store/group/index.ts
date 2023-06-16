@@ -1,19 +1,16 @@
 import {
-    Action,
     ActionReducerMapBuilder,
     createAction,
     createSlice,
 } from '@reduxjs/toolkit';
 import { API } from 'api';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import {
     CallEffect,
     PutEffect,
-    apply,
     call,
     put,
     takeEvery,
-    takeLatest,
 } from 'redux-saga/effects';
 
 export type Group = {
@@ -82,13 +79,8 @@ const groupsReducer = (builder: ActionReducerMapBuilder<GroupsState>) => {
 // request
 
 async function callAPIGetGroups(): Promise<AxiosResponse<any>> {
-    try {
-        const response = await API.get(`/group`);
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.get(`/group`);
+    return response.data;
 }
 
 // saga

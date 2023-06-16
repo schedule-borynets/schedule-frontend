@@ -1,22 +1,7 @@
-import { Button, Checkbox, Collapse, Tag } from 'antd';
-import { FC, MouseEvent } from 'react';
-import {
-    UserOutlined,
-    InfoCircleOutlined,
-    MoreOutlined,
-} from '@ant-design/icons';
+import { Collapse, Tag } from 'antd';
+import { FC } from 'react';
+import { UserOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { openSubjectInfoPanel } from 'store/subject/open-info-panel';
-import { getIsUserLoggedIn } from 'store/auth/login';
-import {
-    addHiddenSubject,
-    getHiddenSubjects,
-    getIsEditing,
-    removeHiddenSubject,
-} from 'store/schedule/edit';
-import type { CheckboxChangeEvent } from 'antd/es/checkbox';
-import { SubjectSchedule } from 'store/subject/schedule';
 import { Lesson } from 'store/schedule/get';
 const { Panel } = Collapse;
 

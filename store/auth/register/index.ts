@@ -4,7 +4,7 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 import { API } from 'api';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import {
     CallEffect,
     PutEffect,
@@ -95,12 +95,8 @@ type APIResponse = {
 };
 
 async function callAPIRegister(json: any): Promise<AxiosResponse<APIResponse>> {
-    try {
-        const response = await API.post('/auth/register', json);
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.post('/auth/register', json);
+    return response.data;
 }
 
 // saga

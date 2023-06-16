@@ -93,15 +93,10 @@ const tagsReducer = (builder: ActionReducerMapBuilder<TagsState>) => {
 async function callAPIGetTagsForSubjectSchedule(
     subjectScheduleId: string
 ): Promise<AxiosResponse<Tag[]>> {
-    try {
-        const response = await API.get(
-            `/tag/subject-schedule/${subjectScheduleId}`
-        );
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.get(
+        `/tag/subject-schedule/${subjectScheduleId}`
+    );
+    return response.data;
 }
 
 // saga

@@ -14,8 +14,6 @@ import {
     takeEvery,
 } from 'redux-saga/effects';
 import { Group } from 'store/group';
-import { ProfileInfo } from 'store/profile/get';
-import { Teacher } from 'store/teacher';
 
 export type Session = {
     date: string;
@@ -96,25 +94,15 @@ const getSessionReducer = (
 async function callAPIGetSession(
     groupId: string
 ): Promise<AxiosResponse<Session>> {
-    try {
-        const response = await axios.get(
-            `https://schedule.kpi.ua/api/exams/group?groupId=${groupId}`
-        );
-
-        return response.data.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await axios.get(
+        `https://schedule.kpi.ua/api/exams/group?groupId=${groupId}`
+    );
+    return response.data.data;
 }
 
 async function callAPIGetGroup(groupId: string): Promise<AxiosResponse<Group>> {
-    try {
-        const response = await API.get(`group/${groupId}`);
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.get(`group/${groupId}`);
+    return response.data;
 }
 
 // saga

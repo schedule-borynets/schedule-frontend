@@ -1,6 +1,5 @@
-import Subject from '@/components/subject';
 import SubjectCard from '@/components/subject-card';
-import { Card, Col, Divider, Row, Tabs, Typography } from 'antd';
+import { Col, Divider, Row, Tabs, Typography } from 'antd';
 import { FC } from 'react';
 import { Lesson } from 'store/schedule/get';
 import styled from 'styled-components';

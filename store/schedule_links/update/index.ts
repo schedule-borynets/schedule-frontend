@@ -12,7 +12,7 @@ import {
     put,
     takeEvery,
 } from 'redux-saga/effects';
-import { ScheduleLink, fetchLinks } from 'store/schedule_links/get';
+import { fetchLinks } from 'store/schedule_links/get';
 
 type UpdateLinkPayload = {
     linkId: string;
@@ -76,13 +76,8 @@ async function callAPIUpdateLinkInfo(
     linkId: string,
     json: Omit<UpdateLinkPayload, 'linkId' | 'subjectScheduleId'>
 ): Promise<AxiosResponse<any>> {
-    try {
-        const response = await API.patch(`/link/${linkId}`, json);
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.patch(`/link/${linkId}`, json);
+    return response.data;
 }
 
 // saga
@@ -100,7 +95,7 @@ function* workerSaga(
 > {
     try {
         const { linkId, subjectScheduleId, ...json } = action.payload;
-        const response = yield call(callAPIUpdateLinkInfo, linkId, json);
+        yield call(callAPIUpdateLinkInfo, linkId, json);
 
         yield put({
             type: updateLinkSucceeded.type,

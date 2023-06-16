@@ -4,20 +4,14 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 import { API } from 'api';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import {
     CallEffect,
     PutEffect,
     call,
     put,
-    takeEvery,
     takeLatest,
 } from 'redux-saga/effects';
-
-type logoutUserPayload = {
-    email: string;
-    password: string;
-};
 
 type logoutState = {
     isLoading: boolean;
@@ -78,13 +72,8 @@ const logoutReducer = (builder: ActionReducerMapBuilder<logoutState>) => {
 async function callAPIlogout(json: {
     refresh_token: string;
 }): Promise<AxiosResponse<any>> {
-    try {
-        const response = await API.post('/auth/logout', json);
-
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.post('/auth/logout', json);
+    return response.data;
 }
 
 // saga
@@ -104,7 +93,7 @@ function* workerSaga(
         const token = localStorage.getItem('refresh_token');
 
         if (token) {
-            const response = yield call(callAPIlogout, {
+            yield call(callAPIlogout, {
                 refresh_token: token,
             });
 

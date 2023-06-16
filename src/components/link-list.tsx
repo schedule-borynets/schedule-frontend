@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { List, Button, Form, Input } from 'antd';
 import LinkForm from '@/components/link-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { ScheduleLink, getLinks } from '../../store/schedule_links/get';
-import { addLink } from '../../store/schedule_links/add';
-import { getSelectedSubjectId } from '../../store/subject/open-info-panel';
+import { ScheduleLink, getLinks } from 'store/schedule_links/get';
+import { addLink } from 'store/schedule_links/add';
+import { getSelectedSubjectId } from 'store/subject/open-info-panel';
 import { updateLink } from 'store/schedule_links/update';
 import { deleteLink } from 'store/schedule_links/delete';
 

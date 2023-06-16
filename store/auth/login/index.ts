@@ -1,21 +1,18 @@
 import {
-    Action,
     ActionReducerMapBuilder,
     createAction,
     createSlice,
 } from '@reduxjs/toolkit';
 import { API } from 'api';
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import {
     CallEffect,
     PutEffect,
-    apply,
     call,
     put,
     takeEvery,
-    takeLatest,
 } from 'redux-saga/effects';
-import { logoutUser, logoutUserSucceeded } from 'store/auth/logout';
+import { logoutUserSucceeded } from 'store/auth/logout';
 
 type LoginUserPayload = {
     email: string;
@@ -112,12 +109,8 @@ type APIResponse = {
 };
 
 async function callAPILogin(json: any): Promise<AxiosResponse<APIResponse>> {
-    try {
-        const response = await API.post('/auth/login', json);
-        return response.data;
-    } catch (err) {
-        throw err;
-    }
+    const response = await API.post('/auth/login', json);
+    return response.data;
 }
 
 // saga
